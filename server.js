@@ -1,6 +1,10 @@
 var express = require('express');
+var app = express();
 
- var app = express();
+//require the module 
+var mongojs = require('mongojs');
+//which mongo database and collection
+var db = mongojs('contactlist',['contactlist']);
 
 app.use(express.static(__dirname + '/public')); //look for static files js html css etc
 app.use('/bootstrap', express.static(__dirname + '/public/bower_components/bootstrap/dist'));
@@ -12,6 +16,12 @@ app.use('/controllers', express.static(__dirname + '/public/controllers'));
 app.get('/contactlist', function(req,res){
 	
 	console.log("I recieved Get for /contactlist");
+
+	db.contactlist.find(function (err,docs){
+
+		console.log(docs);
+		res.json(docs);
+	})
 	//for testing the request from the controller WORKS!
 	/*person1 = {
 
@@ -40,6 +50,16 @@ app.get('/contactlist', function(req,res){
 	res.json(contactList);*/
 	
 	//import from the mongodb
+
+
+});
+
+app.post('/contactlist', function(req,res){
+	//need body parser for req.body
+	console.log(req.body);
 });
 app.listen(3000);
 console.log('server running on port 3000');
+
+//https://www.npmjs.com/package/mongojs-models define scheme and models for mongojs
+//https://www.npmjs.com/package/mongojs great format conntect string examples
