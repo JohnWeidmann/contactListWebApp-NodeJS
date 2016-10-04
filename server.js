@@ -64,6 +64,15 @@ app.post('/contactlist', function(req,res){
 
 	})
 });
+
+app.delete('/contactlist/:id', function(req,res){
+	var id = req.params.id;							//refers to item we are removing
+	db.contactlist.remove({_id:mongojs.ObjectId(id)}, function(err, doc){
+		//send back item we are removing
+		res.json(doc);
+	});
+});
+
 app.listen(3000);
 console.log('server running on port 3000');
 

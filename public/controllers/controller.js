@@ -52,9 +52,16 @@ angular.module('contactListApp', [])
 					$scope.list = response;
 					$scope.contact = "";
 				});
-			}
+			};
 
 			refresh();
+
+			$scope.remove = function(id){
+				console.log(id);
+				$http.delete('/contactlist/' + id).success(function(response){
+					refresh();
+				});
+			};
 
 			$scope.addContact = function(){
 				console.log($scope.contact);
