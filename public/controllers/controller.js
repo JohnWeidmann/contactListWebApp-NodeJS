@@ -46,16 +46,23 @@ angular.module('contactListApp', [])
 
 .controller('contactListController',function($scope,$http){
 			
-			$http.get('/contactlist').success(function(response){
-				console.log("i got the data I requested"); 
-				$scope.list = response;
-			});
-		
+			var refresh = function(){
+				$http.get('/contactlist').success(function(response){
+					console.log("i got the data I requested"); 
+					$scope.list = response;
+					$scope.contact = "";
+				});
+			}
+
+			refresh();
+
 			$scope.addContact = function(){
 				console.log($scope.contact);
 				//$scope.contact the info passing to the server
-				$http.post('/contactlist',$scope.contact)
-				//.success(function(response){ 
-				//});
+				$http.post('/contactlist',$scope.contact).success(function(response){ 
+					//"response" is the response from the server as the argument"
+					console.log(response);
+					refresh();
+				});
 			};
 		});
