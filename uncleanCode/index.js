@@ -21,6 +21,7 @@
 					<td><input class="form-control" ng-model="contact.name"></td>
 					<td><input class="form-control" ng-model="contact.email"></td>
 					<td><input class="form-control" ng-model="contact.number"></td>
+					<!-- <td><button class="btn btn-primary" id="add-update-btn" ng-click="addContact()">Add Contact</td> -->
 					<td><button class="btn btn-primary" id="add-btn" ng-click="addContact()">Add Contact</td>
 					<td><button class="btn btn-warning" id="update-btn" ng-click="update()" style="display:none">Update</td>
 				</tr>
